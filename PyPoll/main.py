@@ -18,16 +18,18 @@ with open(election_csv) as csvfile:
     election_header = next(election_data)
     # print(f'CSV Header: {election_header}')
 
+    # Count Votes for candidates
     for row in election_data:
 
         total_votes = total_votes + 1
 
         name = row[2]
-
+        # Adds candidates to running, adds votes to their progress
         if name not in candidates:
             candidates[name] = 1
         else:
             candidates[name] = candidates[name] + 1
+
 
 print("Election Results")
 print("------------------------")
@@ -37,3 +39,8 @@ print("------------------------")
 for candidate_name, vote_count in candidates.items():
     percentage = vote_count / total_votes * 100
     print(f'{candidate_name}: {percentage:.3f}% {vote_count}')
+
+print("------------------------")
+winner = max(candidates, key = candidates.get)    
+print(f'Winner: {winner}')
+print("------------------------")
