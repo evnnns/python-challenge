@@ -35,4 +35,5 @@ print(f'Total Votes: {total_votes}')
 print("------------------------")
 
 for candidate_name, vote_count in candidates.items():
-    print(f'{candidate_name}: {vote_count}')
+    percentage = vote_count / total_votes * 100
+    print(f'{candidate_name}: {percentage:.3f}% {vote_count}')
