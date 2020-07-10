@@ -3,6 +3,7 @@ import csv
 
 # Path to collect data from the Resources folder
 election_csv = os.path.join('Resources', 'election_data.csv')
+analysis = os.path.join('analysis', 'election_analysis.txt')
 
 total_votes = 0
 
@@ -30,17 +31,17 @@ with open(election_csv) as csvfile:
         else:
             candidates[name] = candidates[name] + 1
 
+with open(analysis, 'w') as txt:
+    print("Election Results", file=txt)
+    print("------------------------", file=txt)
+    print(f'Total Votes: {total_votes}', file=txt)
+    print("------------------------", file=txt)
 
-print("Election Results")
-print("------------------------")
-print(f'Total Votes: {total_votes}')
-print("------------------------")
+    for candidate_name, vote_count in candidates.items():
+        percentage = vote_count / total_votes * 100
+        print(f'{candidate_name}: {percentage:.3f}% {vote_count}', file=txt)
 
-for candidate_name, vote_count in candidates.items():
-    percentage = vote_count / total_votes * 100
-    print(f'{candidate_name}: {percentage:.3f}% {vote_count}')
-
-print("------------------------")
-winner = max(candidates, key = candidates.get)    
-print(f'Winner: {winner}')
-print("------------------------")
+    print("------------------------", file=txt)
+    winner = max(candidates, key = candidates.get)    
+    print(f'Winner: {winner}', file=txt)
+    print("------------------------", file=txt)
