@@ -32,6 +32,22 @@ with open(election_csv) as csvfile:
             candidates[name] = candidates[name] + 1
 
 with open(analysis, 'w') as txt:
+    # Prints to terminal
+    print("Election Results")
+    print("------------------------")
+    print(f'Total Votes: {total_votes}')
+    print("------------------------")
+
+    for candidate_name, vote_count in candidates.items():
+        percentage = vote_count / total_votes * 100
+        print(f'{candidate_name}: {percentage:.3f}% {vote_count}')
+
+    print("------------------------")
+    winner = max(candidates, key = candidates.get)    
+    print(f'Winner: {winner}')
+    print("------------------------")
+
+    # Prints to txt File
     print("Election Results", file=txt)
     print("------------------------", file=txt)
     print(f'Total Votes: {total_votes}', file=txt)
