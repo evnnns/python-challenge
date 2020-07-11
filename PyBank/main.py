@@ -5,6 +5,7 @@ import csv
 budget_csv = os.path.join('Resources', 'budget_data.csv')
 analysis = os.path.join('analysis', 'budget_analysis.txt')
 
+# Dependencies for code
 total_months = 0
 net_pnl = 0
 pnl_data = []
@@ -28,6 +29,7 @@ with open(budget_csv) as csvfile:
         # Sums all PnL data
         net_pnl = net_pnl + float(month[1])
 
+        # Makes a list of each months change in profit compared to previous month
         if pnl_change == 0:
             pnl_change = float(month[1])
         else:
@@ -35,8 +37,11 @@ with open(budget_csv) as csvfile:
             pnl_data.append(pnl_change)
             pnl_change = float(month[1])
 
+# Finds average change of each change in profit loss from month to month
 average_change = sum(pnl_data) / len(pnl_data)
+
 with open(analysis, 'w') as txt:
+    # Prints to Terminal
     print("Financial Analysis")
     print("----------------------------")
     print(f'Total Months: {total_months}')
@@ -45,6 +50,7 @@ with open(analysis, 'w') as txt:
     print(f'Greatest Increase in Profits: ${max(pnl_data):.2f}')
     print(f'Greatest Decrease in Profits: ${min(pnl_data):.2f}')
 
+    # Prints to txt file
     print("Financial Analysis", file=txt)
     print("----------------------------", file=txt)
     print(f'Total Months: {total_months}', file=txt)
